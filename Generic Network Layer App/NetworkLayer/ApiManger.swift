@@ -7,10 +7,15 @@
 
 import Foundation
 
+
 typealias ResultHandler<T> = (Result<T, APIError>) -> Void
 
-class APIErrorHandler {
-    static func handleRequestError(
+protocol APIErrorHandlerProtocol {
+    func handleRequestError(_ error: Error?,completion: @escaping (APIError) -> Void)
+}
+
+class APIErrorHandler: APIErrorHandlerProtocol {
+    func handleRequestError(
         _ error: Error?,
         completion: @escaping (APIError) -> Void
     ) {
@@ -28,16 +33,22 @@ class APIErrorHandler {
     }
 }
 
-class RequestsHandler {
+
+protocol RequestsHandlerProtocol {
+    func requestDataAPI(url: URLRequest, apiErrorHandler: APIErrorHandlerProtocol , completionHandler: @escaping (Result<Data, APIError>) -> Void)
+}
+
+class RequestsHandler: RequestsHandlerProtocol {
     
     func requestDataAPI(
         url: URLRequest,
+        apiErrorHandler: APIErrorHandlerProtocol,
         completionHandler: @escaping (Result<Data, APIError>) -> Void
     ) {
         let session = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let response = response as? HTTPURLResponse,
                   200 ... 299 ~= response.statusCode else {
-                APIErrorHandler.handleRequestError(error) { requestError in
+                apiErrorHandler.handleRequestError(error) { requestError in
                     completionHandler(.failure(requestError))
                 }
                 return
@@ -54,8 +65,10 @@ class RequestsHandler {
     }
     
 }
-
-class ResponseHandler {
+protocol ResponseHandlerProtocol {
+    func parseResonseDecode<T: Decodable>(data: Data,modelType: T.Type,completionHandler: ResultHandler<T>)
+}
+class ResponseHandler: ResponseHandlerProtocol {
     
     func parseResonseDecode<T: Decodable>(
         data: Data,
@@ -72,31 +85,40 @@ class ResponseHandler {
     
 }
 
-
-
-final class APIManager {
+protocol APIManagerProtocl {
+    func request<T: Codable>(
+        modelType: T.Type,
+        requestType: BaseRequestProtocol,
+        completion: @escaping ResultHandler<T>
+    )
+}
+final class APIManager: APIManagerProtocl {
     
     static let shared = APIManager()
-    private let requestsHandler: RequestsHandler
-    private let responseHandler: ResponseHandler
+    private let requestsHandler: RequestsHandlerProtocol
+    private let responseHandler: ResponseHandlerProtocol
+    private let apiErrorHandler: APIErrorHandlerProtocol
     
-    init(requestsHandler: RequestsHandler = RequestsHandler(),
-         responseHandler: ResponseHandler = ResponseHandler()) {
+    init(requestsHandler: RequestsHandlerProtocol = RequestsHandler(),
+         responseHandler: ResponseHandlerProtocol = ResponseHandler(),
+         apiErrorHandler: APIErrorHandlerProtocol = APIErrorHandler()
+    ) {
         self.requestsHandler = requestsHandler
         self.responseHandler = responseHandler
+        self.apiErrorHandler = apiErrorHandler
     }
     
     func request<T: Codable>(
         modelType: T.Type,
-        type: BaseRequestProtocol,
+        requestType: BaseRequestProtocol,
         completion: @escaping ResultHandler<T>
     ) {
-        guard var urlComponents = URLComponents(string: type.url.absoluteString) else {
+        guard var urlComponents = URLComponents(string: requestType.url.absoluteString) else {
             completion(.failure(.invalidURL))
             return
         }
         
-        if let queryParams = type.queryParameters {
+        if let queryParams = requestType.queryParameters {
             urlComponents.queryItems = queryParams.map { (key, value) in
                 URLQueryItem(name: key, value: String(describing: value))
             }
@@ -109,17 +131,17 @@ final class APIManager {
         
         var request = URLRequest(url: url)
         
-        request.httpMethod = type.method.rawValue
+        request.httpMethod = requestType.method.rawValue
         
-        request.allHTTPHeaderFields = type.headers
+        request.allHTTPHeaderFields = requestType.headers
         
-        if let body = type.body {
+        if let body = requestType.body {
             request.httpBody = try? JSONEncoder().encode(body)
         }
 
         
         print(request)
-        requestsHandler.requestDataAPI(url: request) { result in
+        requestsHandler.requestDataAPI(url: request, apiErrorHandler: apiErrorHandler) { result in
             switch result {
             case .success(let data):
                 self.responseHandler.parseResonseDecode(

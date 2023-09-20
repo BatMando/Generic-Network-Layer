@@ -21,6 +21,7 @@
 		CEA7072A2ABADDDE001CA7EC /* ProductsGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA707292ABADDDE001CA7EC /* ProductsGetRequest.swift */; };
 		CEA7072C2ABAE3EB001CA7EC /* AddProductPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7072B2ABAE3EB001CA7EC /* AddProductPostRequest.swift */; };
 		CEA7072E2ABAE80A001CA7EC /* SearchProductsGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7072D2ABAE80A001CA7EC /* SearchProductsGetRequest.swift */; };
+		CEA707312ABAFB65001CA7EC /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA707302ABAFB65001CA7EC /* ViewControllerPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		CEA707292ABADDDE001CA7EC /* ProductsGetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsGetRequest.swift; sourceTree = "<group>"; };
 		CEA7072B2ABAE3EB001CA7EC /* AddProductPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductPostRequest.swift; sourceTree = "<group>"; };
 		CEA7072D2ABAE80A001CA7EC /* SearchProductsGetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductsGetRequest.swift; sourceTree = "<group>"; };
+		CEA707302ABAFB65001CA7EC /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +75,10 @@
 			isa = PBXGroup;
 			children = (
 				59F7A71B2AAD09250059B5B0 /* Application */,
-				59F7A71A2AAD087F0059B5B0 /* View */,
-				59F7A70F2AACFFB20059B5B0 /* Model */,
 				59F7A70A2AACFB9F0059B5B0 /* NetworkLayer */,
+				59F7A70F2AACFFB20059B5B0 /* Model */,
+				59F7A71A2AAD087F0059B5B0 /* View */,
+				CEA7072F2ABAFB4B001CA7EC /* Presenter */,
 				59F7A6FF2AACE95A0059B5B0 /* Assets.xcassets */,
 				59F7A7012AACE95A0059B5B0 /* LaunchScreen.storyboard */,
 				59F7A7042AACE95A0059B5B0 /* Info.plist */,
@@ -137,6 +140,14 @@
 				CEA7072D2ABAE80A001CA7EC /* SearchProductsGetRequest.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		CEA7072F2ABAFB4B001CA7EC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CEA707302ABAFB65001CA7EC /* ViewControllerPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +224,7 @@
 				CEA7072C2ABAE3EB001CA7EC /* AddProductPostRequest.swift in Sources */,
 				59F7A70C2AACFC810059B5B0 /* BaseRequestProtocol.swift in Sources */,
 				59F7A6FB2AACE9570059B5B0 /* ViewController.swift in Sources */,
+				CEA707312ABAFB65001CA7EC /* ViewControllerPresenter.swift in Sources */,
 				59F7A7132AAD017A0059B5B0 /* AddProduct.swift in Sources */,
 				59F7A6F72AACE9570059B5B0 /* AppDelegate.swift in Sources */,
 				59F7A6F92AACE9570059B5B0 /* SceneDelegate.swift in Sources */,

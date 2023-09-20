@@ -7,7 +7,11 @@
 
 import UIKit
 
+protocol ViewControllerProtocol {
+    // methods for reloding the data, getting data from textfields , etc ..
+}
 class ViewController: UIViewController {
+    lazy var presenter: ViewControllerPresenter! = ViewControllerPresenter(view: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,42 +19,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fetchProducts(_ sender: Any) {
-        APIManager.shared.request(modelType: ProductsResponse.self, type: ProductsGetRequest()) { response in
-            switch response {
-            case .success(let productsResponse):
-                print(productsResponse)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        presenter.getProducts()
     }
     
     
     @IBAction func Add(_ sender: Any) {
         let product = AddProduct(title: "BMW")
-    
-        APIManager.shared.request(
-            modelType: AddProduct.self,
-            type: AddProductPostRequest(product: product)) { result in
-                switch result {
-                case .success(let product):
-                    print(product)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+        presenter.addProduct(product: product)
+        
     }
     
     @IBAction func searchProduct(_ sender: Any) {
-        APIManager.shared.request(modelType: ProductsResponse.self, type: SearchProductsGetRequest(searchKey: "phone")) { response in
-            switch response {
-            case .success(let productsResponse):
-                print(productsResponse)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        presenter.searchProducts(by: "phone")
     }
     
+}
+
+extension ViewController: ViewControllerProtocol {
+    // methods implementation
 }
 
