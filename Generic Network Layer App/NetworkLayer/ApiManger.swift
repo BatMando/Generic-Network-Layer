@@ -8,82 +8,6 @@
 import Foundation
 
 
-typealias ResultHandler<T> = (Result<T, APIError>) -> Void
-
-protocol APIErrorHandlerProtocol {
-    func handleRequestError(_ error: Error?,completion: @escaping (APIError) -> Void)
-}
-
-class APIErrorHandler: APIErrorHandlerProtocol {
-    func handleRequestError(
-        _ error: Error?,
-        completion: @escaping (APIError) -> Void
-    ) {
-        if let urlError = error as? URLError {
-            let errorCode = urlError.code
-            switch errorCode {
-            case .notConnectedToInternet, .networkConnectionLost:
-                completion(.network(urlError))
-            default:
-                completion(.network(nil))
-            }
-        } else {
-            completion(.network(nil))
-        }
-    }
-}
-
-
-protocol RequestsHandlerProtocol {
-    func requestDataAPI(url: URLRequest, apiErrorHandler: APIErrorHandlerProtocol , completionHandler: @escaping (Result<Data, APIError>) -> Void)
-}
-
-class RequestsHandler: RequestsHandlerProtocol {
-    
-    func requestDataAPI(
-        url: URLRequest,
-        apiErrorHandler: APIErrorHandlerProtocol,
-        completionHandler: @escaping (Result<Data, APIError>) -> Void
-    ) {
-        let session = URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let response = response as? HTTPURLResponse,
-                  200 ... 299 ~= response.statusCode else {
-                apiErrorHandler.handleRequestError(error) { requestError in
-                    completionHandler(.failure(requestError))
-                }
-                return
-            }
-            
-            guard let data, error == nil else {
-                completionHandler(.failure(.invalidData))
-                return
-            }
-            
-            completionHandler(.success(data))
-        }
-        session.resume()
-    }
-    
-}
-protocol ResponseHandlerProtocol {
-    func parseResonseDecode<T: Decodable>(data: Data,modelType: T.Type,completionHandler: ResultHandler<T>)
-}
-class ResponseHandler: ResponseHandlerProtocol {
-    
-    func parseResonseDecode<T: Decodable>(
-        data: Data,
-        modelType: T.Type,
-        completionHandler: ResultHandler<T>
-    ) {
-        do {
-            let userResponse = try JSONDecoder().decode(modelType, from: data)
-            completionHandler(.success(userResponse))
-        }catch {
-            completionHandler(.failure(.decoding(error)))
-        }
-    }
-    
-}
 
 protocol APIManagerProtocl {
     func request<T: Codable>(
@@ -159,12 +83,4 @@ final class APIManager: APIManagerProtocl {
             }
         }
     }
-
-
-    static var commonHeaders: [String: String] {
-        return [
-            "Content-Type": "application/json"
-        ]
-    }
-    
 }

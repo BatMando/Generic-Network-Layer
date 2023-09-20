@@ -22,6 +22,10 @@
 		CEA7072C2ABAE3EB001CA7EC /* AddProductPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7072B2ABAE3EB001CA7EC /* AddProductPostRequest.swift */; };
 		CEA7072E2ABAE80A001CA7EC /* SearchProductsGetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7072D2ABAE80A001CA7EC /* SearchProductsGetRequest.swift */; };
 		CEA707312ABAFB65001CA7EC /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA707302ABAFB65001CA7EC /* ViewControllerPresenter.swift */; };
+		CEA707352ABB31E8001CA7EC /* APIErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA707342ABB31E8001CA7EC /* APIErrorHandler.swift */; };
+		CEA707382ABB3205001CA7EC /* RequestsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA707372ABB3205001CA7EC /* RequestsHandler.swift */; };
+		CEA7073A2ABB3226001CA7EC /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA707392ABB3226001CA7EC /* ResponseHandler.swift */; };
+		CEA7073C2ABB33DE001CA7EC /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7073B2ABB33DE001CA7EC /* Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		CEA7072B2ABAE3EB001CA7EC /* AddProductPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductPostRequest.swift; sourceTree = "<group>"; };
 		CEA7072D2ABAE80A001CA7EC /* SearchProductsGetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductsGetRequest.swift; sourceTree = "<group>"; };
 		CEA707302ABAFB65001CA7EC /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
+		CEA707342ABB31E8001CA7EC /* APIErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorHandler.swift; sourceTree = "<group>"; };
+		CEA707372ABB3205001CA7EC /* RequestsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsHandler.swift; sourceTree = "<group>"; };
+		CEA707392ABB3226001CA7EC /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
+		CEA7073B2ABB33DE001CA7EC /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +116,9 @@
 		59F7A7152AAD02510059B5B0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				CEA707322ABB31C6001CA7EC /* Handlers */,
 				59F7A7182AAD02AE0059B5B0 /* APIError.swift */,
+				CEA7073B2ABB33DE001CA7EC /* Utility.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -148,6 +158,16 @@
 				CEA707302ABAFB65001CA7EC /* ViewControllerPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		CEA707322ABB31C6001CA7EC /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				CEA707342ABB31E8001CA7EC /* APIErrorHandler.swift */,
+				CEA707372ABB3205001CA7EC /* RequestsHandler.swift */,
+				CEA707392ABB3226001CA7EC /* ResponseHandler.swift */,
+			);
+			path = Handlers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,12 +247,16 @@
 				CEA707312ABAFB65001CA7EC /* ViewControllerPresenter.swift in Sources */,
 				59F7A7132AAD017A0059B5B0 /* AddProduct.swift in Sources */,
 				59F7A6F72AACE9570059B5B0 /* AppDelegate.swift in Sources */,
+				CEA707382ABB3205001CA7EC /* RequestsHandler.swift in Sources */,
 				59F7A6F92AACE9570059B5B0 /* SceneDelegate.swift in Sources */,
+				CEA7073A2ABB3226001CA7EC /* ResponseHandler.swift in Sources */,
 				59F7A7192AAD02AE0059B5B0 /* APIError.swift in Sources */,
 				CEA7072E2ABAE80A001CA7EC /* SearchProductsGetRequest.swift in Sources */,
 				CEA7072A2ABADDDE001CA7EC /* ProductsGetRequest.swift in Sources */,
+				CEA7073C2ABB33DE001CA7EC /* Utility.swift in Sources */,
 				59F7A7172AAD028B0059B5B0 /* ApiManger.swift in Sources */,
 				59F7A7112AACFFBE0059B5B0 /* Product.swift in Sources */,
+				CEA707352ABB31E8001CA7EC /* APIErrorHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

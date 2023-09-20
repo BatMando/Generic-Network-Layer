@@ -24,7 +24,7 @@ protocol BaseRequestProtocol {
 
 extension BaseRequestProtocol {
     var baseURL: String {
-        return "https://dummyjson.com/"
+        return AppConstants.baseURL
     }
     var url: URL {
         return URL(string: "\(baseURL)\(path)")!
@@ -36,7 +36,7 @@ extension BaseRequestProtocol {
         return nil
     }
     var headers: [String : String]? {
-        APIManager.commonHeaders
+        commonHeaders
     }
 }
 

@@ -9,7 +9,7 @@ import Foundation
 
 struct ProductsGetRequest: BaseRequestProtocol {
     var path: String {
-        "products"
+        AppConstants.products
     }
 
     var method: HTTPMethods {

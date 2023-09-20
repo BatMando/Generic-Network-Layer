@@ -11,7 +11,7 @@ struct SearchProductsGetRequest: BaseRequestProtocol {
     var searchKey: String
     
     var path: String {
-        "products/search"
+        AppConstants.searchProduct
     }
     
     var method: HTTPMethods {
