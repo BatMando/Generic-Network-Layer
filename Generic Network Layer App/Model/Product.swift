@@ -9,6 +9,7 @@ import Foundation
 
 struct ProductsResponse: Codable {
     let products: [Product]
+    let total, skip, limit: Int
 }
 
 // MARK: - Product
