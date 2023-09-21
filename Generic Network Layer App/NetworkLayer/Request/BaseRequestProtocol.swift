@@ -24,7 +24,7 @@ protocol BaseRequestProtocol {
 
 extension BaseRequestProtocol {
     var baseURL: String {
-        return AppConstants.baseURL
+        return ApiConstants.baseURL
     }
     var url: URL {
         return URL(string: "\(baseURL)\(path)")!

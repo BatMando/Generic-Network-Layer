@@ -12,7 +12,7 @@ struct AddProductPostRequest: BaseRequestProtocol {
     var product: AddProduct
     
     var path: String {
-        AppConstants.addProduct
+        ApiConstants.addProductEndPoint
     }
     
     var method: HTTPMethods {

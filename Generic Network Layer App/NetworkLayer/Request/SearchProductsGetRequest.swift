@@ -11,13 +11,12 @@ struct SearchProductsGetRequest: BaseRequestProtocol {
     var searchKey: String
     
     var path: String {
-        AppConstants.searchProduct
+        ApiConstants.searchProductEndPoint
     }
     
     var method: HTTPMethods {
         .get
     }
-    
     var queryParameters: [String : Any]? {
         ["q": searchKey]
     }

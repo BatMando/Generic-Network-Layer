@@ -36,5 +36,4 @@ class RequestsHandler: RequestsHandlerProtocol {
         }
         session.resume()
     }
-    
 }

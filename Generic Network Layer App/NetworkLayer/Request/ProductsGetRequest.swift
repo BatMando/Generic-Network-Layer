@@ -9,9 +9,11 @@ import Foundation
 
 struct ProductsGetRequest: BaseRequestProtocol {
     var path: String {
-        AppConstants.products
+        ApiConstants.productsEndPoint
     }
-
+    var baseURL: String {
+        return ApiConstants.baseURL
+    }
     var method: HTTPMethods {
         .get
     }

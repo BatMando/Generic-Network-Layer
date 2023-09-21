@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 protocol APIManagerProtocl {
     func request<T: Codable>(
         modelType: T.Type,
@@ -41,29 +39,21 @@ final class APIManager: APIManagerProtocl {
             completion(.failure(.invalidURL))
             return
         }
-        
         if let queryParams = requestType.queryParameters {
             urlComponents.queryItems = queryParams.map { (key, value) in
                 URLQueryItem(name: key, value: String(describing: value))
             }
         }
-        
         guard let url = urlComponents.url else {
             completion(.failure(.invalidURL))
             return
         }
-        
         var request = URLRequest(url: url)
-        
         request.httpMethod = requestType.method.rawValue
-        
         request.allHTTPHeaderFields = requestType.headers
-        
         if let body = requestType.body {
             request.httpBody = try? JSONEncoder().encode(body)
         }
-
-        
         print(request)
         requestsHandler.requestDataAPI(url: request, apiErrorHandler: apiErrorHandler) { result in
             switch result {
