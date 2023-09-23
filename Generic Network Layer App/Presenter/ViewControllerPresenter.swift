@@ -15,7 +15,7 @@ protocol ViewControllerPresenterProtocol {
 
 class ViewControllerPresenter: ViewControllerPresenterProtocol {
     
-    internal var apiManager: APIManagerProtocl
+    var apiManager: APIManagerProtocl
     weak var view: ViewControllerProtocol?
     
     init(apiManager: APIManagerProtocl = APIManager.shared, view: ViewControllerProtocol) {
