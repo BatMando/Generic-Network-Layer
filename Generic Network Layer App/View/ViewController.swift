@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ViewControllerProtocol {
+protocol ViewControllerProtocol: AnyObject {
     // methods for reloding the data, getting data from textfields , etc ..
 }
 class ViewController: UIViewController {

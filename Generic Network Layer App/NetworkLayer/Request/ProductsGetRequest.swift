@@ -11,9 +11,6 @@ struct ProductsGetRequest: BaseRequestProtocol {
     var path: String {
         ApiConstants.productsEndPoint
     }
-    var baseURL: String {
-        return ApiConstants.baseURL
-    }
     var method: HTTPMethods {
         .get
     }

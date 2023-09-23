@@ -16,12 +16,13 @@ protocol ViewControllerPresenterProtocol {
 class ViewControllerPresenter: ViewControllerPresenterProtocol {
     
     internal var apiManager: APIManagerProtocl
-    let view: ViewControllerProtocol!
+    weak var view: ViewControllerProtocol?
     
     init(apiManager: APIManagerProtocl = APIManager.shared, view: ViewControllerProtocol) {
         self.apiManager = apiManager
         self.view = view
     }
+    
     func getProducts() {
         apiManager.request(
             modelType: ProductsResponse.self,
