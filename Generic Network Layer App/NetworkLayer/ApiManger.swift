@@ -14,9 +14,9 @@ protocol APIManagerProtocl {
         completion: @escaping ResultHandler<T>
     )
 }
-final class APIManager: APIManagerProtocl {
+
+class APIManager: APIManagerProtocl {
     
-    static let shared = APIManager()
     private let requestsHandler: RequestsHandlerProtocol
     private let responseHandler: ResponseHandlerProtocol
     private let apiErrorHandler: APIErrorHandlerProtocol
